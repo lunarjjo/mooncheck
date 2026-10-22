@@ -108,7 +108,7 @@ def main():
         print('GAGAL push {} berkas'.format(fails)); sys.exit(1)
 
     print('=== 3. Dispatch CI ===')
-    status, data = api('POST', '/repos/{}/{}/actions/workflows/android.yml/dispatches'.format(OWNER, REPO),
+    status, data = api('POST', '/repos/{}/{}/actions/workflows/ci.yml/dispatches'.format(OWNER, REPO),
                        {'ref': 'main'})
     print('  DISPATCH ->', status, 'OK' if status == 204 else json.dumps(data)[:160])
     if status != 204:
