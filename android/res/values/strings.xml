@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">mooncheck</string>
+    <string name="app_desc">Absensi admin &amp; anggota — QR, lokasi, offline</string>
+    <color name="brand_primary">#5B57D6</color>
+    <color name="brand_bg_light">#F4F5FA</color>
+    <color name="brand_bg_dark">#0E1017</color>
+</resources>
