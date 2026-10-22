@@ -56,9 +56,19 @@ def collect_files():
 
 
 def put_file(path, content_bytes, message):
-    b64 = base64.b64encode(content_bytes).decode('ascii')
-    status, data = api('PUT', '/repos/{}/{}/contents/{}'.format(OWNER, REPO, path),
-                       {'message': message, 'content': b64})
+    # idempoten: bila sudah ada & identik → lewati; bila beda → update dgn sha
+    status, existing = api('GET', '/repos/{}/{}/contents/{}'.format(OWNER, REPO, path))
+    payload = {'message': message, 'content': base64.b64encode(content_bytes).decode('ascii')}
+    if status == 200 and isinstance(existing, dict):
+        try:
+            cur = base64.b64decode(existing.get('content', '').replace('\n', ''))
+        except Exception:
+            cur = None
+        if cur == content_bytes:
+            print('  SAMA {:<45} -> lewati'.format(path))
+            return True
+        payload['sha'] = existing['sha']
+    status, data = api('PUT', '/repos/{}/{}/contents/{}'.format(OWNER, REPO, path), payload)
     if status in (200, 201):
         sha = (data or {}).get('commit', {}).get('sha', '?')[:8]
         print('  PUSH {:<46} -> OK ({})'.format(path, sha))
