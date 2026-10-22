@@ -1,0 +1,49 @@
+name: android
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Test (Node, 228 unit)
+        run: node tests/run_all.js
+
+      - name: Siapkan komponen SDK
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" \
+            "platforms;android-34" "build-tools;35.0.0" >/dev/null 2>&1 || true
+
+      - name: Build APK (tanpa Gradle)
+        run: bash android/build_apk.sh
+
+      - name: Verifikasi APK
+        run: |
+          BT="$ANDROID_HOME/build-tools/35.0.0"
+          "$BT/aapt2" dump badging release/mooncheck-v0.1.0.apk | head -5
+          "$BT/zipalign" -c 4 release/mooncheck-v0.1.0.apk && echo "alignment OK"
+          "$BT/apksigner" verify release/mooncheck-v0.1.0.apk && echo "tanda tangan OK"
+
+      - name: Unggah artefak APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: mooncheck-apk
+          path: release/*.apk
