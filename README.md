@@ -96,3 +96,5 @@ backup JSON. Sinkronisasi multi-perangkat adalah kandidat roadmap v0.2.
 ## Lisensi
 
 MIT — lihat [LICENSE](LICENSE). Pustaka vendored: [LICENSES](app/js/vendor/LICENSES.md).
+
+<!-- uji-trigger -->
