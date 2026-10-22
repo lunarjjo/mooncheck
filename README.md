@@ -1,3 +1,8 @@
+> ⚠️ **DEPRECATED — digantikan oleh [lunarjjo/hadir](https://github.com/lunarjjo/hadir)**
+> Versi 1.0.0 (Flutter native) menggantikan proyek ini sesuai arahan pemilik:
+> aplikasi harus dibangun dengan framework Android asli, bukan pembungkus web.
+> mooncheck v0.1.0 (web-vanilla + WebView) tetap tersedia sebagai arsip.
+
 # mooncheck
 
 **Aplikasi absensi Android lengkap — admin & anggota dalam satu APK.**
