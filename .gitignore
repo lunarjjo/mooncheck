@@ -1,0 +1,12 @@
+# build & artefak lokal
+build/
+release/
+e2e_shots/
+tools/qr_matrix.txt
+tools/budi_qr.png
+tools/plain_white.png
+android/mooncheck.keystore
+node_modules/
+__pycache__/
+*.log
+.DS_Store
