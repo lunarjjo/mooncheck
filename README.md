@@ -1,105 +1,112 @@
-> ⚠️ **DEPRECATED — digantikan oleh [lunarjjo/hadir](https://github.com/lunarjjo/hadir)**
-> Versi 1.0.0 (Flutter native) menggantikan proyek ini sesuai arahan pemilik:
-> aplikasi harus dibangun dengan framework Android asli, bukan pembungkus web.
-> mooncheck v0.1.0 (web-vanilla + WebView) tetap tersedia sebagai arsip.
+> ⚠️ **DEPRECATED — superseded by [lunarjjo/hadir](https://github.com/lunarjjo/hadir)**
+> Version 1.0.0 (native Flutter) replaces this project following the owner's
+> direction: the app must be built with a real Android framework, not as a web
+> wrapper. mooncheck v0.1.0 (vanilla-web + WebView) remains available as an archive.
 
 # mooncheck
 
-**Aplikasi absensi Android lengkap — admin & anggota dalam satu APK.**
-Offline-first, QR bertanda tangan HMAC, geofence lokasi, tema mengikuti perangkat.
+<div align="center">
+
+<sub>🌐 <b>English</b> · <a href="README.id.md">Bahasa Indonesia</a></sub>
+
+</div>
+
+**A full-featured Android attendance app — admin & members in a single APK.**
+Offline-first, HMAC-signed QR, location geofence, theme follows the device.
 
 ![platform](docs/badges/flat__platform__android-50plus.svg)
 ![tests](docs/badges/lunar__tests__228-lulus.svg)
-![versi](docs/badges/flat__versi__v010.svg)
+![version](docs/badges/flat__versi__v010.svg)
 ![deps](docs/badges/flatsq__deps__0-npm-pip.svg)
-![ukuran](docs/badges/lunar__ukuran__160-kb-apk.svg)
-![lisensi](docs/badges/flat__lisensi__mit.svg)
+![size](docs/badges/lunar__ukuran__160-kb-apk.svg)
+![license](docs/badges/flat__lisensi__mit.svg)
 
-> Proyek ketiga agen [lunarjjo](https://github.com/lunarjjo) — dibangun dengan mandat
-> "tugas berat dengan debugging panjang": 2.300+ baris kode, 228 unit test,
-> E2E browser dua jalur kripto, dan siklus debug 12 bug nyata (lihat [CHANGELOG](CHANGELOG.md)).
+> The third project of the [lunarjjo](https://github.com/lunarjjo) agent — built
+> under the "heavy task with long debugging" mandate: 2,300+ lines of code,
+> 228 unit tests, browser E2E across two crypto paths, and a real 12-bug debug
+> cycle (see the [CHANGELOG](CHANGELOG.md)).
 
-## Apa yang ada di dalamnya
+## What's inside
 
-| Area | Fitur |
+| Area | Features |
 |---|---|
-| **Peran** | Admin & anggota dalam satu aplikasi; UI menyesuaikan peran yang masuk |
-| **Absensi** | Check-in/out dengan jam, status otomatis (tepat / telat / cepat / lembur), menit kerja, catatan |
-| **Lokasi** | Koordinat GPS tiap absen, jarak ke kantor, **geofence radius** dengan konfirmasi bila di luar area |
-| **QR** | Kartu QR anggota bertanda tangan **HMAC-SHA256** (QR palsu ditolak); pemindai admin: kamera langsung **atau** pilih gambar |
-| **Login & keamanan** | Password **PBKDF2-SHA256 100.000 iterasi** (salt unik per akun), kunci brute-force, sesi + **kunci otomatis**, **log audit** 500 peristiwa |
-| **Izin** | Pengajuan sakit/izin/cuti → persetujuan admin → terhitung dalam statistik |
-| **Admin** | Kelola anggota (tambah/ubah/reset pw/nonaktif/hapus), koreksi absensi berjejak, rekap harian, **matriks bulanan H/T/A/I**, ekspor CSV |
-| **Backup** | Ekspor/impor JSON tervalidasi penuh, ekspor CSV (BOM + escaping Excel) |
-| **Tema** | **Ikuti perangkat** (dark/light otomatis) atau paksa terang/gelap — termasuk bilah status Android |
-| **Kompatibilitas** | **Android 5.0 (API 21) sampai terbaru**, tanpa Play Services, tanpa AndroidX, tanpa server eksternal |
+| **Roles** | Admin & member in one app; the UI adapts to the signed-in role |
+| **Attendance** | Check-in/out with timestamps, automatic status (on time / late / early / overtime), worked minutes, notes |
+| **Location** | GPS coordinates on every check-in, distance to office, **radius geofence** with confirmation when outside the area |
+| **QR** | Member QR cards signed with **HMAC-SHA256** (forged QR rejected); admin scanner: live camera **or** pick an image |
+| **Login & security** | **PBKDF2-SHA256, 100,000 iterations** (unique salt per account), brute-force lock, sessions + **auto-lock**, **audit log** of 500 events |
+| **Leave** | Sick/leave/vacation requests → admin approval → counted into statistics |
+| **Admin** | Member management (add/edit/reset pw/deactivate/delete), traceable attendance corrections, daily reports, **monthly H/T/A/I matrix**, CSV export |
+| **Backup** | Fully validated JSON export/import, CSV export (BOM + Excel escaping) |
+| **Theme** | **Follows the device** (auto dark/light) or force light/dark — including the Android status bar |
+| **Compatibility** | **Android 5.0 (API 21) to latest**, no Play Services, no AndroidX, no external server |
 
-## Tangkapan layar
+## Screenshots
 
-| Beranda Admin | Pengaturan (gelap) | Check-in Member | Kartu QR |
+| Admin Home | Settings (dark) | Member Check-in | QR Card |
 |---|---|---|---|
 | ![admin](docs/screenshots/01-admin-home.png) | ![settings](docs/screenshots/02-settings-dark.png) | ![checkin](docs/screenshots/05-member-checkin.png) | ![qr](docs/screenshots/07-qr-card.png) |
 
-| Riwayat + Kalender | Pemindai QR | Laporan Matriks | Mode Gelap Member |
+| History + Calendar | QR Scanner | Matrix Report | Member Dark Mode |
 |---|---|---|---|
 | ![history](docs/screenshots/08-history.png) | ![scan](docs/screenshots/09-scan.png) | ![rekap](docs/screenshots/03-rekap.png) | ![dark](docs/screenshots/10-member-dark.png) |
 
-## Instalasi
+## Installation
 
-Unduh `mooncheck-v0.1.0.apk` dari [halaman rilis](https://github.com/lunarjjo/mooncheck/releases),
-buka di Android, izinkan "instal dari sumber tidak dikenal", selesai. Buka aplikasi →
-buat akun admin pertama → mulai menambah anggota.
+Download `mooncheck-v0.1.0.apk` from the [releases page](https://github.com/lunarjjo/mooncheck/releases),
+open it on Android, allow "install from unknown sources", done. Open the app →
+create the first admin account → start adding members.
 
-Tidak ada akun cloud, tidak ada iklan, tidak ada pelacakan — seluruh data disimpan
-**lokal di perangkat** (localStorage WebView).
+There is no cloud account, no ads, no tracking — all data is stored
+**locally on the device** (WebView localStorage).
 
-## Struktur proyek
+## Project structure
 
 ```
-app/                    aplikasi web inti (HTML/CSS/JS vanilla, tanpa build step)
-  js/crypto.js          SHA-256 + HMAC + PBKDF2 murni JS (fallback non-secure-context)
-  js/db.js              lapisan data: user, absensi, izin, audit, pengaturan, backup
-  js/geo.js             haversine, evaluasi geofence, sumber lokasi (bridge/web)
-  js/qrlib.js           payload QR HMAC + render SVG + decode jsQR
-  js/attendance.js      logika murni: status, statistik bulanan, format Indonesia
-  js/ui.js, js/app.js   komponen UI + router hash + manajer tema
-  js/pages/*.js         11 halaman (auth, beranda, riwayat, qr, scan, anggota,
-                        rekap, izin, laporan, pengaturan, profil)
-  js/vendor/            qrcode-generator + jsQR (MIT, vendored — lihat LICENSES)
-android/                pembungkus native (3 file Java, tanpa Gradle)
-  MainActivity.java     WebView + permission runtime + file chooser
-  LocalServer.java      server loopback beralamat-token (secure context)
-  Bridge.java           jembatan JS: lokasi native, tema, unduhan, getar
+app/                    the core web app (vanilla HTML/CSS/JS, no build step)
+  js/crypto.js          pure-JS SHA-256 + HMAC + PBKDF2 (non-secure-context fallback)
+  js/db.js              data layer: users, attendance, leave, audit, settings, backups
+  js/geo.js             haversine, geofence evaluation, location sources (bridge/web)
+  js/qrlib.js           HMAC QR payloads + SVG rendering + jsQR decoding
+  js/attendance.js      pure logic: statuses, monthly stats, Indonesian formats
+  js/ui.js, js/app.js   UI components + hash router + theme manager
+  js/pages/*.js         11 pages (auth, home, history, qr, scan, members,
+                        reports, leave, matrix, settings, profile)
+  js/vendor/            qrcode-generator + jsQR (MIT, vendored — see LICENSES)
+android/                the native wrapper (3 Java files, no Gradle)
+  MainActivity.java     WebView + runtime permissions + file chooser
+  LocalServer.java      token-addressed loopback server (secure context)
+  Bridge.java           the JS bridge: native location, theme, downloads, vibrate
   build_apk.sh          aapt2 → javac → d8 → zipalign → apksigner
-tests/                  228 test Node (crypto NIST/RFC, db, geo, QR roundtrip, logika)
-tools/                  generator vektor uji, ikon, QR PNG untuk E2E
+tests/                  228 Node tests (NIST/RFC crypto vectors, db, geo, QR roundtrip, logic)
+tools/                  test-vector generator, icons, QR PNGs for E2E
 ```
 
-## Pengembangan
+## Development
 
 ```bash
-# uji (Node saja, tanpa dependensi)
+# run the tests (Node only, no dependencies)
 node tests/run_all.js
 
-# buka aplikasi di browser (mode file:// = jalur kripto murni)
-python3 -m http.server 8791 -d app   # atau buka app/index.html langsung
+# open the app in a browser (file:// mode = the pure-crypto path)
+python3 -m http.server 8791 -d app   # or open app/index.html directly
 
-# build APK (butuh Android SDK platform-34 + build-tools 35)
+# build the APK (needs Android SDK platform-34 + build-tools 35)
 bash android/build_apk.sh
 ```
 
-Detail lengkap: [docs/BUILD.md](docs/BUILD.md) · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) ·
+Full details: [docs/BUILD.md](docs/BUILD.md) · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) ·
 [docs/SECURITY.md](docs/SECURITY.md) · [docs/USER_GUIDE.md](docs/USER_GUIDE.md)
 
-## Anggota
+## Usage model
 
-Aplikasi ini dipakai oleh satu perangkat pada satu waktu (pola "pos absensi"):
-admin memegang perangkat untuk memindai QR anggota, atau anggota memakai perangkat
-bersama untuk absen mandiri. Semua data bisa dipindah antar perangkat lewat
-backup JSON. Sinkronisasi multi-perangkat adalah kandidat roadmap v0.2.
+This app is used by one device at a time (an "attendance post" pattern):
+an admin holds the device to scan member QR codes, or members use a shared
+device for self check-in. All data can move between devices through
+JSON backup. Multi-device sync is a v0.2 roadmap candidate.
 
-## Lisensi
+## License
 
-MIT — lihat [LICENSE](LICENSE). Pustaka vendored: [LICENSES](app/js/vendor/LICENSES.md).
+MIT — see [LICENSE](LICENSE). Vendored libraries: [LICENSES](app/js/vendor/LICENSES.md).
 
 <!-- uji-trigger -->
